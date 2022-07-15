@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "seed:dev": "nodemon ./db/seed.js"    
+    "seed:dev": "nodemon ./db/seed.js"
   },
   "keywords": [],
   "author": "",
