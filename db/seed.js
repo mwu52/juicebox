@@ -19,12 +19,14 @@ async function dropTables() {
   try {
     console.log("Starting to drop tables...");
 
-    await client.query(`
+    await client.query(
+      `
         DROP TABLE IF EXISTS post_tags;
         DROP TABLE IF EXISTS tags;
         DROP TABLE IF EXISTS posts;
         DROP TABLE IF EXISTS users;
-      `);
+      `
+    );
 
     console.log("Finished dropping tables!");
   } catch (error) {
@@ -37,7 +39,8 @@ async function createTables() {
   try {
     console.log("Starting to build tables...");
 
-    await client.query(`
+    await client.query(
+      `
         CREATE TABLE users (
           id SERIAL PRIMARY KEY,
           username varchar(255) UNIQUE NOT NULL,
@@ -65,7 +68,8 @@ async function createTables() {
           "tagId" INTEGER REFERENCES tags(id), 
           UNIQUE ("postId", "tagId")
         );
-      `);
+      `
+    );
 
     console.log("Finished building tables!");
   } catch (error) {
@@ -115,7 +119,7 @@ async function createInitialPosts() {
       title: "First Post",
       content:
         "This is my first post. I hope I love writing blogs as much as I love writing them.",
-        tags: ["#happy", "#youcandoanything"],
+      tags: ["#happy", "#youcandoanything"],
     });
 
     await createPost({
@@ -143,10 +147,10 @@ async function createInitialTags() {
     console.log("Starting to create tags...");
 
     const [happy, sad, inspo, catman] = await createTags([
-      '#happy', 
-      '#worst-day-ever', 
-      '#youcandoanything',
-      '#catmandoeverything'
+      "#happy",
+      "#worst-day-ever",
+      "#youcandoanything",
+      "#catmandoeverything",
     ]);
 
     const [postOne, postTwo, postThree] = await getAllPosts();
@@ -208,7 +212,7 @@ async function testDB() {
 
     console.log("Calling updatePost on posts[1], only updating tags");
     const updatePostTagsResult = await updatePost(posts[1].id, {
-      tags: ["#youcandoanything", "#redfish", "#bluefish"]
+      tags: ["#youcandoanything", "#redfish", "#bluefish"],
     });
     console.log("Result:", updatePostTagsResult);
 
