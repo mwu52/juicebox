@@ -94,7 +94,6 @@ async function createPost({ authorId, title, content }) {
       `
     INSERT INTO users("authorId", title, content) 
     VALUES($1, $2, $3) 
-    ON CONFLICT (username) DO NOTHING 
     RETURNING *;
   `,
       [authorId, title, content]
@@ -149,11 +148,17 @@ async function getAllPosts() {
 }
 
 async function getPostsByUser(userId) {
+  try {
     const { rows } = await client.query(`
       SELECT * FROM posts
       WHERE "authorId"=${userId};
     `);
+
+    return rows;
+  } catch (error) {
+    throw error;
   }
+}
 
 module.exports = {
   client,
