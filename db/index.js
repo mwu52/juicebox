@@ -51,13 +51,17 @@ async function updateUser(id, fields = {}) {
 }
 
 async function getAllUsers() {
-  const { rows } = await client.query(
-    `SELECT id, username, name, location, active
+  try {
+    const { rows } = await client.query(
+      `SELECT id, username, name, location, active
       FROM users;
     `
-  );
+    );
 
-  return rows;
+    return rows;
+  } catch (error) {
+    throw error;
+  }
 }
 
 async function getUserById(userId) {
@@ -88,7 +92,7 @@ async function createPost({ authorId, title, content }) {
       rows: [post],
     } = await client.query(
       `
-    INSERT INTO users(authorId, title, content) 
+    INSERT INTO users("authorId", title, content) 
     VALUES($1, $2, $3) 
     ON CONFLICT (username) DO NOTHING 
     RETURNING *;
