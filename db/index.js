@@ -189,7 +189,7 @@ async function getPostsByUser(userId) {
     throw error;
   }
 }
-
+ 
 async function createTags(tagList) {
   if (tagList.length === 0) {
     return;
@@ -337,6 +337,20 @@ async function getPostsByTagName(tagName) {
   }
 }
 
+async function getAllTags() {
+  try {
+    const { rows } = await client.query(
+      `
+      SELECT * FROM tags
+    `
+    );
+
+    return rows;
+  } catch (error) {
+    throw error;
+  }
+}
+
 module.exports = {
   client,
   createUser,
@@ -352,4 +366,5 @@ module.exports = {
   getPostById,
   addTagsToPost,
   getPostsByTagName,
+  getAllTags,
 };
