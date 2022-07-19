@@ -14,6 +14,7 @@ const {
   addTagsToPost,
   getPostsByTagName,
   getAllTags,
+  getUserByUsername,
 } = require("./index");
 
 async function dropTables() {
