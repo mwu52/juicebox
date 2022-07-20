@@ -6,8 +6,6 @@ const { getUserByUsername } = require("../db");
 const { createUser } = require("../db");
 const jwt = require('jsonwebtoken');
 
-
-
 usersRouter.use((req, res, next) => {
   console.log("A request is being made to /users");
 
@@ -25,7 +23,6 @@ usersRouter.get("/", async (req, res) => {
 usersRouter.post('/login', async (req, res, next) => {
   const { username, password } = req.body;
 
-  // request must have both
   if (!username || !password) {
     next({
       name: "MissingCredentialsError",
@@ -91,6 +88,5 @@ usersRouter.post('/register', async (req, res, next) => {
     next({ name, message })
   } 
 });
-
 
 module.exports = usersRouter;
