@@ -18,9 +18,7 @@ postsRouter.get("/", async (req, res, next) => {
       return post.active || (req.user && post.author.id === req.user.id);
     });
 
-    res.send({
-      posts,
-    });
+    res.send({ posts });
   } catch ({ name, message }) {
     next({ name, message });
   }
