@@ -13,20 +13,20 @@ tagsRouter.get("/", async (req, res) => {
   const tags = await getAllTags();
 
   res.send({
-    tags
+    tags,
   });
 });
 
-tagsRouter.get('/:tagName/posts', async (req, res, next) => {
-  const tag = req.params.tagName
+tagsRouter.get("/:tagName/posts", async (req, res, next) => {
+  const tag = req.params.tagName;
 
   try {
     const posts = await getPostsByTagName(tag);
-    const filteredPosts = posts.filter(post => {
+    const filteredPosts = posts.filter((post) => {
       return post.active || (req.user && post.author.id === req.user.id);
     });
 
-    res.send({ filteredPosts })
+    res.send({ filteredPosts });
   } catch ({ name, message }) {
     next({ name, message });
   }

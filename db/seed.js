@@ -7,14 +7,9 @@ const {
   createPost,
   updatePost,
   getAllPosts,
-  getPostsByUser,
   createTags,
-  createPostTag,
-  getPostById,
   addTagsToPost,
   getPostsByTagName,
-  getAllTags,
-  getUserByUsername,
 } = require("./index");
 
 async function dropTables() {
@@ -137,6 +132,7 @@ async function createInitialPosts() {
       content: "Do you even? I swear that half of you are posing.",
       tags: ["#happy", "#youcandoanything", "#canmandoeverything"],
     });
+
     console.log("Finished creating posts!");
   } catch (error) {
     console.log("Error creating posts!");
@@ -149,10 +145,10 @@ async function createInitialTags() {
     console.log("Starting to create tags...");
 
     const [happy, sad, inspo, catman] = await createTags([
-      "#happy",
-      "#worst-day-ever",
-      "#youcandoanything",
-      "#catmandoeverything",
+      '#happy', 
+      '#worst-day-ever', 
+      '#youcandoanything',
+      '#catmandoeverything'
     ]);
 
     const [postOne, postTwo, postThree] = await getAllPosts();
